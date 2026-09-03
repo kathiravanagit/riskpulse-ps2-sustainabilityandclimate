@@ -5,11 +5,20 @@ const USE_MOCK = import.meta.env.VITE_USE_MOCK === 'true'
 
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
 
+function normalizeLocation(location) {
+  const coordinates = Array.isArray(location.coordinates)
+    ? location.coordinates
+    : [location.latitude, location.longitude]
+
+  return { ...location, coordinates }
+}
+
 export async function getLocations() {
-  if (USE_MOCK) { await delay(300); return [...LOCATIONS] }
+  if (USE_MOCK) { await delay(300); return LOCATIONS.map(normalizeLocation) }
   const res = await fetch(`${API_BASE}/locations`)
   if (!res.ok) throw new Error('Failed to fetch locations')
-  return res.json()
+  const locations = await res.json()
+  return locations.map(normalizeLocation)
 }
 
 export async function getRiskData() {
