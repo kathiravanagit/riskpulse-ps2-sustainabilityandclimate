@@ -100,9 +100,9 @@ python -m uvicorn app.main:app --reload --port 8000
 
 Backend URLs:
 
-- API: http://localhost:8000
-- Swagger docs: http://localhost:8000/docs
-- Health: http://localhost:8000/health
+- API: <http://localhost:8000>
+- Swagger docs: <http://localhost:8000/docs>
+- Health: <http://localhost:8000/health>
 
 ## Frontend Setup
 
@@ -113,7 +113,7 @@ Copy-Item .env.example .env
 npm run dev
 ```
 
-Frontend URL: http://localhost:3000
+Frontend URL: <http://localhost:3000>
 
 `frontend/.env` controls the data source:
 
