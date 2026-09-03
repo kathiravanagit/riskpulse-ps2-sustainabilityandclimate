@@ -1,0 +1,13 @@
+fastapi
+uvicorn[standard]
+pydantic
+pymongo
+motor
+pandas
+numpy
+scikit-learn
+python-dotenv
+httpx
+pytest
+pytest-asyncio
+anyio

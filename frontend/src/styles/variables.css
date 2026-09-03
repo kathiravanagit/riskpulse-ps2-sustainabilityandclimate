@@ -1,0 +1,110 @@
+/* RiskPulse - CSS Custom Properties */
+:root {
+  /* Colors - calm operations palette */
+  --color-bg: #f4f7fb;
+  --color-surface: #ffffff;
+  --color-surface-muted: #eef3f8;
+  --color-text: #111827;
+  --color-text-secondary: #475569;
+  --color-text-muted: #64748b;
+  --color-border: #dbe3ec;
+  --color-border-strong: #b8c5d3;
+  
+  /* Glassmorphism backdrop */
+  --glass-bg: rgba(255, 255, 255, 0.92);
+  --glass-border: rgba(15, 23, 42, 0.08);
+  --glass-shadow: 0 8px 28px rgba(15, 23, 42, 0.08);
+  
+  /* Primary brand - Bright accent for dark theme */
+  --color-primary: #1769aa;
+  --color-primary-hover: #0f5287;
+  --color-primary-light: #dceefb;
+  
+  /* Risk colors - functional meaning only */
+  --color-success: #10b981;
+  --color-success-bg: rgba(16, 185, 129, 0.15);
+  --color-success-border: rgba(16, 185, 129, 0.3);
+  
+  --color-warning: #f59e0b;
+  --color-warning-bg: rgba(245, 158, 11, 0.15);
+  --color-warning-border: rgba(245, 158, 11, 0.3);
+  
+  --color-danger: #ef4444;
+  --color-danger-bg: rgba(239, 68, 68, 0.15);
+  --color-danger-border: rgba(239, 68, 68, 0.3);
+  
+  /* Risk level colors */
+  --risk-low: #10b981;
+  --risk-low-bg: rgba(16, 185, 129, 0.1);
+  --risk-moderate: #f59e0b;
+  --risk-moderate-bg: rgba(245, 158, 11, 0.1);
+  --risk-high: #f97316;
+  --risk-high-bg: rgba(249, 115, 22, 0.1);
+  --risk-critical: #ef4444;
+  --risk-critical-bg: rgba(239, 68, 68, 0.1);
+  
+  /* Focus */
+  --color-focus: #1769aa;
+  --color-focus-ring: rgba(23, 105, 170, 0.22);
+  
+  /* Shadows - glassmorphism depth */
+  --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.05);
+  --shadow-sm: 0 4px 12px rgba(15, 23, 42, 0.08);
+  --shadow-md: 0 10px 24px rgba(15, 23, 42, 0.1);
+  --shadow-lg: 0 20px 42px rgba(15, 23, 42, 0.14);
+  
+  /* Border radius - only 3 values */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  
+  /* Spacing scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  
+  /* Typography - strict scale */
+  --font-family: 'Inter', 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  
+  --fs-display: 36px;
+  --fs-h1: 28px;
+  --fs-h2: 22px;
+  --fs-h3: 18px;
+  --fs-body: 14px;
+  --fs-small: 12px;
+  --fs-caption: 11px;
+  
+  --fw-normal: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  
+  --lh-tight: 1.2;
+  --lh-normal: 1.5;
+  --lh-relaxed: 1.6;
+  
+  /* Transitions - smooth spring-like easing */
+  --easing: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --transition-fast: 150ms ease-out;
+  --transition-normal: 250ms ease-out;
+  --transition-slow: 350ms ease-out;
+  
+  /* Layout */
+  --sidebar-width: 260px;
+  --sidebar-collapsed: 72px;
+  --topbar-height: 64px;
+  --header-height: 64px;
+  
+  /* Z-index */
+  --z-dropdown: 100;
+  --z-modal: 200;
+  --z-tooltip: 300;
+  --z-toast: 400;
+}

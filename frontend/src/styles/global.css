@@ -1,0 +1,518 @@
+/* RiskPulse - Global Styles */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+/* Respect prefers-reduced-motion for smooth scroll and animations */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-normal);
+  line-height: var(--lh-normal);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Typography - strict hierarchy */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-tight);
+  color: var(--color-text);
+}
+
+h1 { font-size: var(--fs-h1); }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); }
+h4 { font-size: var(--fs-body); font-weight: var(--fw-medium); }
+
+p {
+  line-height: var(--lh-relaxed);
+}
+
+.small { font-size: var(--fs-small); }
+.caption { 
+  font-size: var(--fs-caption); 
+  color: var(--color-text-muted);
+  font-weight: var(--fw-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+}
+
+/* Links */
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-primary-hover);
+}
+
+/* Focus visible for accessibility */
+:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* Selection */
+::selection {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+/* Entrance animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp var(--transition-normal) var(--easing);
+}
+
+.fade-in {
+  animation: fadeIn var(--transition-normal) var(--easing);
+}
+
+.slide-in-left {
+  animation: slideInLeft var(--transition-normal) var(--easing);
+}
+
+.slide-in-right {
+  animation: slideInRight var(--transition-normal) var(--easing);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-strong);
+  border-radius: var(--radius-sm);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-secondary);
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-strong);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-muted);
+}
+
+/* Entrance animations for elements */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Focus visible enhancement */
+:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Leaflet map fixes */
+.leaflet-container {
+  font-family: var(--font-family);
+  font-size: var(--fs-body);
+  background: var(--color-surface);
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+}
+
+.leaflet-popup-content {
+  margin: var(--space-3) var(--space-4);
+  line-height: var(--lh-normal);
+}
+
+.leaflet-control-attribution {
+  font-size: var(--fs-caption);
+  color: var(--color-text-muted);
+}
+
+/* Recharts tooltip customization */
+.recharts-tooltip-wrapper {
+  outline: none;
+}
+
+.recharts-default-tooltip {
+  background: var(--color-surface) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: var(--shadow-lg) !important;
+  padding: var(--space-3) var(--space-4) !important;
+}
+
+.recharts-tooltip-label {
+  color: var(--color-text-secondary) !important;
+  font-size: var(--fs-small) !important;
+  font-weight: var(--fw-medium) !important;
+}
+
+.recharts-tooltip-item {
+  color: var(--color-text) !important;
+  font-weight: var(--fw-semibold) !important;
+}
+
+/* MUI overrides - clean, professional */
+.MuiButtonBase-root {
+  font-family: var(--font-family) !important;
+}
+
+.MuiButton-root {
+  text-transform: none !important;
+  font-weight: var(--fw-medium) !important;
+  border-radius: var(--radius-sm) !important;
+  padding: 8px 16px !important;
+  font-size: var(--fs-small) !important;
+  transition: all var(--transition-fast) !important;
+}
+
+.MuiButton-contained {
+  box-shadow: var(--shadow-xs) !important;
+}
+
+.MuiButton-contained:hover {
+  box-shadow: var(--shadow-sm) !important;
+  transform: translateY(-1px);
+}
+
+.MuiButton-outlined {
+  border-width: 1px !important;
+  border-color: var(--color-border) !important;
+}
+
+.MuiButton-outlined:hover {
+  border-color: var(--color-border-strong) !important;
+  background: var(--color-surface-muted) !important;
+}
+
+.MuiButton-text {
+  color: var(--color-text-secondary) !important;
+}
+
+.MuiButton-text:hover {
+  background: var(--color-surface-muted) !important;
+  color: var(--color-text) !important;
+}
+
+.MuiButton-sizeSmall {
+  padding: 6px 12px !important;
+  font-size: var(--fs-caption) !important;
+}
+
+.MuiIconButton-root {
+  border-radius: var(--radius-sm) !important;
+  transition: all var(--transition-fast) !important;
+}
+
+.MuiIconButton-root:hover {
+  background: var(--color-surface-muted) !important;
+}
+
+.MuiCard-root {
+  border-radius: var(--radius-md) !important;
+  box-shadow: var(--shadow-sm) !important;
+  border: 1px solid var(--color-border) !important;
+  background: var(--color-surface) !important;
+}
+
+.MuiPaper-root {
+  background: var(--color-surface) !important;
+}
+
+.MuiDrawer-paper {
+  border-right: 1px solid var(--color-border) !important;
+  background: var(--color-surface) !important;
+}
+
+.MuiAppBar-root {
+  background: var(--color-surface) !important;
+  border-bottom: 1px solid var(--color-border) !important;
+  box-shadow: var(--shadow-xs) !important;
+}
+
+.MuiTooltip-tooltip {
+  background: var(--color-text) !important;
+  color: var(--color-bg) !important;
+  font-size: var(--fs-caption) !important;
+  font-weight: var(--fw-medium) !important;
+  border-radius: var(--radius-sm) !important;
+  padding: 6px 10px !important;
+}
+
+.MuiDialog-paper {
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-lg) !important;
+}
+
+.MuiTableCell-root {
+  font-size: var(--fs-small) !important;
+  border-bottom: 1px solid var(--color-border) !important;
+  padding: 10px 12px !important;
+}
+
+.MuiTableCell-head {
+  font-weight: var(--fw-semibold) !important;
+  color: var(--color-text-secondary) !important;
+  background: var(--color-surface-muted) !important;
+  font-size: var(--fs-caption) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.MuiTableRow-root:hover {
+  background: var(--color-surface-muted) !important;
+}
+
+.MuiTablePagination-root {
+  font-size: var(--fs-small) !important;
+}
+
+.MuiInputBase-root {
+  font-size: var(--fs-small) !important;
+}
+
+.MuiOutlinedInput-root {
+  border-radius: var(--radius-sm) !important;
+}
+
+.MuiOutlinedInput-notchedOutline {
+  border-color: var(--color-border) !important;
+}
+
+.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: var(--color-border-strong) !important;
+}
+
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: var(--color-focus) !important;
+  border-width: 2px !important;
+}
+
+.MuiChip-root {
+  font-size: var(--fs-caption) !important;
+  font-weight: var(--fw-medium) !important;
+  border-radius: var(--radius-sm) !important;
+  height: 24px !important;
+}
+
+.MuiAvatar-root {
+  font-weight: var(--fw-semibold) !important;
+}
+
+.MuiDivider-root {
+  border-color: var(--color-border) !important;
+}
+
+.MuiListItem-root {
+  border-radius: var(--radius-sm) !important;
+  margin: 2px 8px !important;
+}
+
+.MuiListItem-root.Mui-selected {
+  background: var(--color-primary-light) !important;
+  color: var(--color-primary) !important;
+}
+
+.MuiListItem-root.Mui-selected:hover {
+  background: var(--color-primary-light) !important;
+}
+
+/* Visually hidden for screen readers */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Skip link for keyboard navigation */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--color-primary);
+  color: #fff;
+  padding: 8px 16px;
+  z-index: 10000;
+  transition: top var(--transition-fast);
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* Entrance animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.4s var(--easing) both;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s var(--easing) both;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.3s var(--easing) both;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.3s var(--easing) both;
+}
+
+/* Staggered children animation */
+.stagger-children > * {
+  animation: fadeInUp 0.4s var(--easing) both;
+}
+
+.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-children > *:nth-child(2) { animation-delay: 50ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 100ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 150ms; }
+.stagger-children > *:nth-child(5) { animation-delay: 200ms; }
+.stagger-children > *:nth-child(6) { animation-delay: 250ms; }
+.stagger-children > *:nth-child(7) { animation-delay: 300ms; }
+.stagger-children > *:nth-child(8) { animation-delay: 350ms; }
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

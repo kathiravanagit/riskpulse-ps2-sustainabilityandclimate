@@ -1,0 +1,244 @@
+.sensors-page {
+  padding: var(--space-5);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.sensors-page__header {
+  margin-bottom: var(--space-5);
+}
+
+.sensors-page__title {
+  font-size: var(--fs-h1);
+  margin: 0;
+}
+
+.sensors-page__subtitle {
+  color: var(--color-text-secondary);
+  margin: var(--space-1) 0 0;
+}
+
+.sensors-page__stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+.sensors-page__stat {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4) var(--space-5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  text-align: center;
+}
+
+.sensors-page__stat-value {
+  font-family: var(--font-mono);
+  font-size: 28px;
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+}
+
+.sensors-page__stat-value--total { color: var(--color-primary); }
+.sensors-page__stat-value--online { color: var(--color-success); }
+.sensors-page__stat-value--delayed { color: var(--color-warning); }
+.sensors-page__stat-value--offline { color: var(--color-danger); }
+
+.sensors-page__stat-label {
+  font-size: var(--fs-small);
+  color: var(--color-text-secondary);
+  font-weight: var(--fw-medium);
+}
+
+.sensors-page__filters {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-surface-muted);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-4);
+}
+
+.sensors-page__filter-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.sensors-page__filter-label {
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-medium);
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+.sensors-page__select {
+  padding: 6px 32px 6px 12px;
+  font-family: var(--font-family);
+  font-size: var(--fs-small);
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  transition: border-color var(--transition-fast);
+}
+
+.sensors-page__select:focus {
+  outline: none;
+  border-color: var(--color-focus);
+  box-shadow: 0 0 0 3px var(--color-focus-ring);
+}
+
+.sensors-page__count {
+  margin-left: auto;
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+}
+
+.sensors-page__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--space-4);
+}
+
+.sensors-page__card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4) var(--space-5);
+  transition: box-shadow var(--transition-normal), border-color var(--transition-normal);
+}
+
+.sensors-page__card:hover {
+  box-shadow: var(--shadow-sm);
+  border-color: var(--color-border-strong);
+}
+
+.sensors-page__card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.sensors-page__card-id {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.sensors-page__card-id-label {
+  font-size: var(--fs-caption);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sensors-page__card-id-value {
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text);
+}
+
+.sensors-page__card-location,
+.sensors-page__card-type {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin-bottom: var(--space-3);
+}
+
+.sensors-page__card-location-label,
+.sensors-page__card-type-label {
+  font-size: var(--fs-caption);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sensors-page__card-location-value,
+.sensors-page__card-type-value {
+  font-size: var(--fs-small);
+  color: var(--color-text);
+}
+
+.sensors-page__card-readings {
+  margin-bottom: var(--space-3);
+}
+
+.sensors-page__card-readings-label {
+  font-size: var(--fs-caption);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: block;
+  margin-bottom: var(--space-2);
+}
+
+.sensors-page__card-readings-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-2);
+}
+
+.sensors-page__reading {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--space-2);
+  background: var(--color-surface-muted);
+  border-radius: var(--radius-sm);
+}
+
+.sensors-page__reading-key {
+  font-size: var(--fs-caption);
+  color: var(--color-text-muted);
+  text-transform: capitalize;
+}
+
+.sensors-page__reading-value {
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text);
+}
+
+.sensors-page__card-meta {
+  font-size: var(--fs-caption);
+  color: var(--color-text-muted);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-border);
+}
+
+@media (max-width: 1024px) {
+  .sensors-page__stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .sensors-page {
+    padding: var(--space-3);
+  }
+  .sensors-page__stats {
+    grid-template-columns: 1fr;
+  }
+  .sensors-page__grid {
+    grid-template-columns: 1fr;
+  }
+}

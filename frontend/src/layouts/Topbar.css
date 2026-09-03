@@ -1,0 +1,232 @@
+.topbar {
+  position: fixed;
+  top: 0;
+  left: var(--sidebar-width);
+  right: 0;
+  height: var(--topbar-height);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-5);
+  z-index: 50;
+  transition: all var(--transition-normal);
+}
+
+.topbar__left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.topbar__menu-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.topbar__menu-btn:hover {
+  background: var(--color-surface-muted);
+  color: var(--color-text);
+}
+
+.topbar__brand-name {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-bold);
+  color: var(--color-text);
+  letter-spacing: 1px;
+}
+
+.topbar__center {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.topbar__status {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.topbar__status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-success);
+}
+
+.topbar__status-dot--active {
+  animation: pulse-status 2s infinite;
+}
+
+.topbar__status-label {
+  font-size: var(--fs-small);
+  font-weight: var(--fw-medium);
+  color: var(--color-text-secondary);
+}
+
+.topbar__separator {
+  width: 1px;
+  height: 20px;
+  background: var(--color-border);
+}
+
+.topbar__meta {
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.topbar__conn-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-success);
+}
+
+.topbar__right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.topbar__demo-badge {
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-semibold);
+  color: var(--color-warning);
+  background: var(--color-warning-bg);
+  border: 1px solid var(--color-warning-border);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.5px;
+}
+
+.btn--active-demo {
+  color: var(--color-warning) !important;
+  font-weight: var(--fw-semibold) !important;
+}
+
+.topbar__notif-wrap {
+  position: relative;
+}
+
+.topbar__notif-count {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color-danger);
+  color: #fff;
+  font-size: 10px;
+  font-weight: var(--fw-bold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.topbar__notif-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 340px;
+  max-width: calc(100vw - 24px);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  z-index: 200;
+}
+
+.topbar__notif-header {
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-semibold);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.topbar__notif-item {
+  display: flex;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.topbar__notif-item:last-child {
+  border-bottom: none;
+}
+
+.topbar__notif-item:hover {
+  background: var(--color-surface-muted);
+}
+
+.topbar__notif-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+
+.topbar__notif-dot--critical { background: var(--risk-critical); }
+.topbar__notif-dot--high { background: var(--risk-high); }
+.topbar__notif-dot--info { background: var(--color-primary); }
+
+.topbar__notif-title {
+  font-size: var(--fs-small);
+  font-weight: var(--fw-medium);
+  color: var(--color-text);
+  margin-bottom: 2px;
+}
+
+.topbar__notif-time {
+  font-size: var(--fs-caption);
+  color: var(--color-text-muted);
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+  .topbar {
+    left: 0;
+    padding: 0 var(--space-3);
+  }
+  .topbar__menu-btn {
+    display: flex;
+  }
+  .topbar__center {
+    display: none;
+  }
+  .topbar__brand-name {
+    display: none;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .topbar {
+    left: var(--sidebar-collapsed);
+  }
+}

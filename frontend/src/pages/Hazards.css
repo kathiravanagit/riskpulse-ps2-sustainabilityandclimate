@@ -1,0 +1,32 @@
+.hazards-page { max-width: 1440px; margin: 0 auto; padding: var(--space-6) clamp(var(--space-4), 4vw, var(--space-10)); }
+.hazards-page__header { display: flex; justify-content: space-between; gap: var(--space-6); align-items: end; padding-bottom: var(--space-6); border-bottom: 1px solid var(--color-border); }
+.hazards-page h1 { margin: 0 0 var(--space-2); }
+.hazards-page__header p:not(.eyebrow) { color: var(--color-text-secondary); margin: 0; }
+.eyebrow { color: var(--color-primary); font-size: var(--fs-caption); font-weight: var(--fw-bold); letter-spacing: .08em; text-transform: uppercase; margin: 0 0 var(--space-2); }
+.hazards-page__selector { display: grid; gap: var(--space-1); min-width: 240px; color: var(--color-text-secondary); font-size: var(--fs-small); }
+.hazards-page select { padding: 10px 12px; border: 1px solid var(--color-border); border-radius: var(--radius-sm); background: var(--color-surface); color: var(--color-text); }
+.hazards-page__alert, .hazards-page__loading { margin: var(--space-5) 0; padding: var(--space-4); border: 1px solid var(--color-border); background: var(--color-surface); }
+.hazards-summary { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; margin: var(--space-6) 0; background: var(--color-border); border: 1px solid var(--color-border); }
+.hazards-summary > div { display: flex; align-items: baseline; gap: var(--space-3); padding: var(--space-5); background: var(--color-surface); }
+.hazards-summary strong { font-size: 28px; color: var(--color-text); }
+.hazards-summary > div > span:last-child { color: var(--color-text-secondary); font-size: var(--fs-small); }
+.hazards-layout { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(320px, .8fr); gap: var(--space-6); }
+.section-heading { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--color-border); padding-bottom: var(--space-3); margin-bottom: var(--space-3); }
+.section-heading h2 { font-size: var(--fs-h3); margin: 0; }
+.section-heading span { color: var(--color-text-muted); font-size: var(--fs-small); }
+.hazard-signals { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-3); }
+.hazard-signals .section-heading { grid-column: 1 / -1; }
+.hazard-signal, .response-queue { border: 1px solid var(--color-border); background: var(--color-surface); padding: var(--space-4); }
+.hazard-signal__top, .hazard-signal__score { display: flex; align-items: center; gap: var(--space-2); }
+.hazard-signal h3 { font-size: var(--fs-body); margin: 0 auto 0 0; }
+.hazard-signal__score strong { font-size: 26px; font-family: var(--font-mono); }
+.hazard-signal__score span { color: var(--color-text-muted); font-size: var(--fs-small); }
+.hazard-signal__bar { height: 5px; flex: 1; background: var(--color-surface-muted); }
+.hazard-signal__bar i { display: block; height: 100%; background: var(--color-primary); }
+.hazard-signal p { color: var(--color-text-secondary); font-size: var(--fs-small); margin: var(--space-3) 0 var(--space-1); }
+.hazard-signal small { color: var(--color-text-muted); }
+.hazard-level { padding: 3px 7px; border: 1px solid currentColor; font-size: var(--fs-caption); font-weight: var(--fw-bold); text-transform: uppercase; }
+.hazard-level--low { color: var(--risk-low); }.hazard-level--moderate { color: var(--risk-moderate); }.hazard-level--high { color: var(--risk-high); }.hazard-level--critical { color: var(--risk-critical); }
+.response-item { display: grid; grid-template-columns: 28px 1fr; gap: var(--space-3); padding: var(--space-4) 0; border-bottom: 1px solid var(--color-border); }
+.response-item:last-child { border-bottom: 0; }.response-item > b { color: var(--color-primary); font-family: var(--font-mono); }.response-item strong { font-size: var(--fs-body); }.response-item p { color: var(--color-text-secondary); font-size: var(--fs-small); margin: var(--space-1) 0; }.response-item span { color: var(--color-text-muted); font-size: var(--fs-caption); text-transform: uppercase; }
+@media (max-width: 800px) { .hazards-page__header, .hazards-layout { display: block; }.hazards-page__selector { margin-top: var(--space-5); }.hazards-summary { grid-template-columns: 1fr; }.hazard-signals { grid-template-columns: 1fr; margin-bottom: var(--space-6); }.hazard-signals .section-heading { grid-column: auto; } }
