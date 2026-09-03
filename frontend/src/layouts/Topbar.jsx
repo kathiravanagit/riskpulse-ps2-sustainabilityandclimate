@@ -3,7 +3,22 @@ import './Topbar.css'
 
 export default function Topbar({ onMenuToggle, onRefresh, refreshing, demoMode, onToggleDemo }) {
   const [notifOpen, setNotifOpen] = useState(false)
+  const [alertPermission, setAlertPermission] = useState(
+    typeof Notification === 'undefined' ? 'unsupported' : Notification.permission
+  )
   const notifRef = useRef(null)
+
+  const enableAlerts = async () => {
+    if (typeof Notification === 'undefined') return
+    const permission = await Notification.requestPermission()
+    setAlertPermission(permission)
+    if (permission === 'granted') {
+      new Notification('RiskPulse alerts enabled', {
+        body: 'You will receive website alerts for rescue teams and residents.',
+        tag: 'riskpulse-alerts'
+      })
+    }
+  }
 
   useEffect(() => {
     function handleClickOutside(e) {
@@ -75,6 +90,27 @@ export default function Topbar({ onMenuToggle, onRefresh, refreshing, demoMode, 
           {notifOpen && (
             <div className="topbar__notif-dropdown" role="menu" aria-label="Notifications">
               <div className="topbar__notif-header">Notifications</div>
+              <div className="topbar__alert-channels">
+                <div>
+                  <div className="topbar__alert-title">Emergency alert channels</div>
+                  <div className="topbar__alert-status">
+                    {alertPermission === 'granted'
+                      ? 'Website notifications enabled'
+                      : alertPermission === 'denied'
+                        ? 'Notifications blocked in browser settings'
+                        : 'Enable alerts for this device'}
+                  </div>
+                </div>
+                {alertPermission !== 'granted' && alertPermission !== 'unsupported' && (
+                  <button className="btn btn--secondary btn--sm" onClick={enableAlerts}>
+                    Enable
+                  </button>
+                )}
+              </div>
+              <div className="topbar__alert-recipients" aria-label="Alert recipients">
+                <span>Rescue teams</span>
+                <span>Residents</span>
+              </div>
               <div className="topbar__notif-item" role="menuitem">
                 <span className="topbar__notif-dot topbar__notif-dot--critical" aria-hidden="true" />
                 <div>
