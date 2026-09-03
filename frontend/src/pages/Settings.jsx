@@ -1,5 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './Settings.css'
+
+const SETTINGS_KEY = 'riskpulse_settings'
 
 export default function Settings() {
   const [settings, setSettings] = useState({
@@ -21,6 +23,13 @@ export default function Settings() {
   })
 
   const [saved, setSaved] = useState(false)
+
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem(SETTINGS_KEY)
+      if (stored) setSettings(prev => ({ ...prev, ...JSON.parse(stored) }))
+    } catch { /* use defaults */ }
+  }, [])
 
   const handleNotificationChange = (key) => {
     setSettings(prev => ({
@@ -47,6 +56,7 @@ export default function Settings() {
   }
 
   const handleSave = () => {
+    localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings))
     setSaved(true)
     setTimeout(() => setSaved(false), 3000)
   }

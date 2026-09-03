@@ -19,6 +19,8 @@ from app.api import (
     ml_predictions,
     hazards,
     resources,
+    auth,
+    alerts,
 )
 
 logging.basicConfig(
@@ -65,6 +67,11 @@ app.add_middleware(
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
     logger.error(f"Unhandled exception: {exc}", exc_info=True)
+    if isinstance(exc, RuntimeError) and str(exc) == "Database is not initialized":
+        return JSONResponse(
+            status_code=503,
+            content={"detail": "Database is unavailable. Start MongoDB and try again."},
+        )
     return JSONResponse(
         status_code=500,
         content={"detail": "Internal server error. Please try again later."},
@@ -83,6 +90,8 @@ app.include_router(simulation.router)
 app.include_router(ml_predictions.router)
 app.include_router(hazards.router)
 app.include_router(resources.router)
+app.include_router(auth.router)
+app.include_router(alerts.router)
 
 
 @app.get("/")

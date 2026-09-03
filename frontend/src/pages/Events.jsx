@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
-import { getLocations, getSensors, getCitizenReports } from '../services/api'
+import { getLocations, getSensors, getCitizenReports, sendAlert } from '../services/api'
 import { SkeletonCards, ErrorState, EmptyState } from '../components'
 import './Events.css'
 
@@ -10,6 +10,7 @@ export default function Events({ demoMode }) {
   const [sensors, setSensors] = useState([])
   const [reports, setReports] = useState([])
   const [activeTab, setActiveTab] = useState('all')
+  const [alertState, setAlertState] = useState({})
 
   const loadData = useCallback(async () => {
     setLoading(true)
@@ -43,6 +44,7 @@ export default function Events({ demoMode }) {
           detail: `Risk score ${loc.risk_score}. ${loc.recommended_action}`,
           time: loc.updated_at || 'Unknown',
           location: loc.name
+          , locationId: loc.location_id
         })
       }
     })
@@ -66,6 +68,7 @@ export default function Events({ demoMode }) {
         detail: `${report.condition} at ${report.location_name}`,
         time: report.timestamp,
         location: report.location_name
+          , locationId: report.location_id
       })
     })
 
@@ -80,6 +83,23 @@ export default function Events({ demoMode }) {
 
   const allEvents = getEventTimeline()
   const filteredEvents = activeTab === 'all' ? allEvents : allEvents.filter(e => e.type === activeTab)
+
+  const handleAlert = async (event) => {
+    setAlertState(prev => ({ ...prev, [event.title]: 'sending' }))
+    try {
+      const result = await sendAlert({
+        title: event.title,
+        message: event.detail,
+        severity: event.severity.toUpperCase(),
+        location_id: event.locationId,
+        audiences: ['rescue_teams', 'residents'],
+        recipients: []
+      })
+      setAlertState(prev => ({ ...prev, [event.title]: result.channels }))
+    } catch (error) {
+      setAlertState(prev => ({ ...prev, [event.title]: error.message }))
+    }
+  }
 
   const getSeverityIcon = (severity) => {
     switch (severity) {
@@ -164,6 +184,16 @@ export default function Events({ demoMode }) {
                   </div>
                   <p className="events-page__event-detail">{event.detail}</p>
                   <span className="events-page__event-location">{event.location}</span>
+                  {(event.severity === 'critical' || event.severity === 'high') && (
+                    <div className="events-page__alert-action">
+                      <button className="btn btn--secondary btn--sm" onClick={() => handleAlert(event)} disabled={alertState[event.title] === 'sending'}>
+                        {alertState[event.title] === 'sending' ? 'Sending...' : 'Send emergency alert'}
+                      </button>
+                      {alertState[event.title] && alertState[event.title] !== 'sending' && (
+                        <span className="events-page__alert-status">{typeof alertState[event.title] === 'string' ? alertState[event.title] : `Recorded: SMS ${alertState[event.title].sms}, radio ${alertState[event.title].radio}`}</span>
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
             ))}

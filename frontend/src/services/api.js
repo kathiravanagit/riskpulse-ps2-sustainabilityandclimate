@@ -2,8 +2,50 @@ import { LOCATIONS, SENSORS, CITIZEN_REPORTS, PRIORITY_QUEUE, RISK_TREND, SENSOR
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000'
 const USE_MOCK = import.meta.env.VITE_USE_MOCK === 'true'
+const TOKEN_KEY = 'riskpulse_access_token'
 
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
+
+function authHeaders() {
+  const token = localStorage.getItem(TOKEN_KEY)
+  return token ? { Authorization: `Bearer ${token}` } : {}
+}
+
+export async function loginUser(email, password) {
+  const res = await fetch(`${API_BASE}/auth/login`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email, password }) })
+  if (!res.ok) throw new Error((await res.json()).detail || 'Invalid email or password')
+  const data = await res.json()
+  localStorage.setItem(TOKEN_KEY, data.access_token)
+  return data.user
+}
+
+export async function registerUser(name, email, password) {
+  const res = await fetch(`${API_BASE}/auth/register`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name, email, password }) })
+  if (!res.ok) throw new Error((await res.json()).detail || 'Registration failed')
+  const data = await res.json()
+  localStorage.setItem(TOKEN_KEY, data.access_token)
+  return data.user
+}
+
+export async function getCurrentUser() {
+  const res = await fetch(`${API_BASE}/auth/me`, { headers: authHeaders() })
+  if (!res.ok) throw new Error('Session expired')
+  return res.json()
+}
+
+export async function sendAlert(alert) {
+  const res = await fetch(`${API_BASE}/alerts`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...authHeaders() },
+    body: JSON.stringify(alert)
+  })
+  if (!res.ok) throw new Error((await res.json()).detail || 'Alert dispatch failed')
+  return res.json()
+}
+
+export function clearAuthToken() {
+  localStorage.removeItem(TOKEN_KEY)
+}
 
 function normalizeLocation(location) {
   const fallback = LOCATIONS.find(item => item.location_id === location.location_id) || {}
@@ -20,6 +62,7 @@ export async function getLocations() {
     const res = await fetch(`${API_BASE}/locations`)
     if (!res.ok) throw new Error('Failed to fetch locations')
     const locations = await res.json()
+    if (!locations.length) return LOCATIONS.map(normalizeLocation)
     return locations.map(normalizeLocation)
   } catch {
     return LOCATIONS.map(normalizeLocation)

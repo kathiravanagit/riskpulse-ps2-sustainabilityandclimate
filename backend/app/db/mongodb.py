@@ -24,6 +24,8 @@ async def close_mongo_connection():
 
 
 def get_database():
+    if db.database is None:
+        raise RuntimeError("Database is not initialized")
     return db.database
 
 

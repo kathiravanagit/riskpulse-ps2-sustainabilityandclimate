@@ -10,6 +10,12 @@ class Settings:
     WEATHER_API_KEY: str = os.getenv("WEATHER_API_KEY", "")
     SMS_API_KEY: str = os.getenv("SMS_API_KEY", "")
     SMS_SENDER_ID: str = os.getenv("SMS_SENDER_ID", "RISKPULSE")
+    TWILIO_ACCOUNT_SID: str = os.getenv("TWILIO_ACCOUNT_SID", "")
+    TWILIO_AUTH_TOKEN: str = os.getenv("TWILIO_AUTH_TOKEN", "")
+    TWILIO_FROM_NUMBER: str = os.getenv("TWILIO_FROM_NUMBER", "")
+    RADIO_WEBHOOK_URL: str = os.getenv("RADIO_WEBHOOK_URL", "")
+    AUTH_SECRET: str = os.getenv("AUTH_SECRET", "change-this-secret")
+    AUTH_TOKEN_TTL_SECONDS: int = int(os.getenv("AUTH_TOKEN_TTL_SECONDS", "3600"))
     CORS_ORIGINS: str = os.getenv("CORS_ORIGINS", "http://localhost:3000")
 
     RISK_WEIGHT_RAINFALL: float = 0.25

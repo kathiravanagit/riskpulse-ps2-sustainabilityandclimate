@@ -25,7 +25,7 @@ export default function Login() {
       return
     }
 
-    const result = login(email, password)
+    const result = await login(email, password)
     setLoading(false)
 
     if (result.success) {
@@ -57,7 +57,7 @@ export default function Login() {
       return
     }
 
-    const result = register(name, email, password)
+    const result = await register(name, email, password)
     setLoading(false)
 
     if (result.success) {

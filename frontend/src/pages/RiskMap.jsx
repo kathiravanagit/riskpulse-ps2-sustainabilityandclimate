@@ -38,6 +38,7 @@ export default function RiskMap({ demoMode }) {
   const [selectedLocation, setSelectedLocation] = useState(null)
   const [mapCenter, setMapCenter] = useState([12.98, 80.22])
   const [mapZoom, setMapZoom] = useState(12)
+  const [tileError, setTileError] = useState(false)
 
   const loadData = useCallback(async () => {
     setLoading(true)
@@ -96,7 +97,12 @@ export default function RiskMap({ demoMode }) {
         <div className="risk-map-page__layout">
           <div className="risk-map-page__map-wrapper">
             <MapContainer center={mapCenter} zoom={mapZoom} className="risk-map-page__map" zoomControl={true}>
-              <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" attribution='&copy; OpenStreetMap' />
+              <TileLayer
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution='&copy; OpenStreetMap'
+                eventHandlers={{ tileerror: () => setTileError(true), load: () => setTileError(false) }}
+              />
+              {tileError && <div className="risk-map-page__tile-error" role="status">Map tiles unavailable. Location data is still available.</div>}
               <MapController center={mapCenter} zoom={mapZoom} />
               {locations.map(loc => (
                 <CircleMarker

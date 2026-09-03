@@ -108,7 +108,10 @@ class RiskEngine:
         )
 
     async def get_risk_assessment(self, location_id: str) -> Optional[RiskAssessment]:
-        db = get_database()
+        try:
+            db = get_database()
+        except RuntimeError:
+            return None
         doc = await db["risk_assessments"].find_one(
             {"location_id": location_id},
             sort=[("calculated_at", -1)],
