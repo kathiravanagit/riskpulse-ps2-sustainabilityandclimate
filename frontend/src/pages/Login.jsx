@@ -31,7 +31,7 @@ export default function Login() {
     if (result.success) {
       navigate('/dashboard')
     } else {
-      setError(result.error)
+      setError(`${result.error}. For a new local setup, use Register here first.`)
     }
   }
 
@@ -46,8 +46,8 @@ export default function Login() {
       setLoading(false)
       return
     }
-    if (password.length < 6) {
-      setError('Password must be at least 6 characters')
+    if (password.length < 8) {
+      setError('Password must be at least 8 characters')
       setLoading(false)
       return
     }

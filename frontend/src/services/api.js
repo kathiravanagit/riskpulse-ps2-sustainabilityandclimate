@@ -3,6 +3,7 @@ import { LOCATIONS, SENSORS, CITIZEN_REPORTS, PRIORITY_QUEUE, RISK_TREND, SENSOR
 const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000'
 const USE_MOCK = import.meta.env.VITE_USE_MOCK === 'true'
 const TOKEN_KEY = 'riskpulse_access_token'
+const MOCK_USER_KEY = 'riskpulse_mock_user'
 
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
 
@@ -12,6 +13,15 @@ function authHeaders() {
 }
 
 export async function loginUser(email, password) {
+  if (USE_MOCK) {
+    await delay(150)
+    const user = JSON.parse(localStorage.getItem(MOCK_USER_KEY) || 'null')
+    if (!user || user.email !== email.trim().toLowerCase() || user.password !== password) {
+      throw new Error('No matching demo account. Use Register here first.')
+    }
+    localStorage.setItem(TOKEN_KEY, 'mock-token')
+    return { email: user.email, name: user.name, role: user.role }
+  }
   const res = await fetch(`${API_BASE}/auth/login`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email, password }) })
   if (!res.ok) throw new Error((await res.json()).detail || 'Invalid email or password')
   const data = await res.json()
@@ -20,6 +30,13 @@ export async function loginUser(email, password) {
 }
 
 export async function registerUser(name, email, password) {
+  if (USE_MOCK) {
+    await delay(150)
+    const user = { name: name.trim(), email: email.trim().toLowerCase(), password, role: 'viewer' }
+    localStorage.setItem(MOCK_USER_KEY, JSON.stringify(user))
+    localStorage.setItem(TOKEN_KEY, 'mock-token')
+    return { email: user.email, name: user.name, role: user.role }
+  }
   const res = await fetch(`${API_BASE}/auth/register`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name, email, password }) })
   if (!res.ok) throw new Error((await res.json()).detail || 'Registration failed')
   const data = await res.json()
@@ -28,6 +45,13 @@ export async function registerUser(name, email, password) {
 }
 
 export async function getCurrentUser() {
+  if (USE_MOCK) {
+    await delay(100)
+    const token = localStorage.getItem(TOKEN_KEY)
+    const user = JSON.parse(localStorage.getItem(MOCK_USER_KEY) || 'null')
+    if (token !== 'mock-token' || !user) throw new Error('Session expired')
+    return { email: user.email, name: user.name, role: user.role }
+  }
   const res = await fetch(`${API_BASE}/auth/me`, { headers: authHeaders() })
   if (!res.ok) throw new Error('Session expired')
   return res.json()

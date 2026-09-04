@@ -91,12 +91,15 @@ pip install -r requirements.txt
 Copy-Item .env.example .env
 ```
 
-Set `MONGODB_URI`, `DATABASE_NAME`, and `CORS_ORIGINS` in `backend/.env`, then seed the local database:
+Set `MONGODB_URI`, `DATABASE_NAME`, and `CORS_ORIGINS` in `backend/.env`. To create the local administrator used by the login screen, also set `BOOTSTRAP_ADMIN_EMAIL` and `BOOTSTRAP_ADMIN_PASSWORD` to your own values, then seed the database:
 
 ```powershell
 python scripts/generate_synthetic_data.py
+python scripts/seed_database.py
 python -m uvicorn app.main:app --reload --port 8000
 ```
+
+Sign in with the bootstrap email and password from `backend/.env`. If those variables are omitted, no account is created; you can use the registration form to create a viewer account instead.
 
 Backend URLs:
 

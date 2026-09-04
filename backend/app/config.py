@@ -16,7 +16,9 @@ class Settings:
     RADIO_WEBHOOK_URL: str = os.getenv("RADIO_WEBHOOK_URL", "")
     AUTH_SECRET: str = os.getenv("AUTH_SECRET", "change-this-secret")
     AUTH_TOKEN_TTL_SECONDS: int = int(os.getenv("AUTH_TOKEN_TTL_SECONDS", "3600"))
-    CORS_ORIGINS: str = os.getenv("CORS_ORIGINS", "http://localhost:3000")
+    CORS_ORIGINS: str = os.getenv("CORS_ORIGINS", "http://localhost:3000,http://localhost:3001")
+    BOOTSTRAP_ADMIN_EMAIL: str = os.getenv("BOOTSTRAP_ADMIN_EMAIL", "")
+    BOOTSTRAP_ADMIN_PASSWORD: str = os.getenv("BOOTSTRAP_ADMIN_PASSWORD", "")
 
     RISK_WEIGHT_RAINFALL: float = 0.25
     RISK_WEIGHT_WATER_LEVEL: float = 0.25

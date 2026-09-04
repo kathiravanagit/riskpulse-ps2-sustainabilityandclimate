@@ -26,6 +26,8 @@ VITE_API_BASE_URL=http://localhost:8000
 VITE_USE_MOCK=false
 ```
 
+For a local administrator account, set `BOOTSTRAP_ADMIN_EMAIL` and `BOOTSTRAP_ADMIN_PASSWORD` in `backend/.env`, then run `python scripts/seed_database.py`. The seed command creates that account only if it does not already exist. Do not commit the password.
+
 ## Data Recovery
 
 If a report cannot be submitted, the browser keeps it in the `riskpulse_offline_reports` local-storage queue. The queue is retried on the browser `online` event. Operators should still verify that queued reports reached the API before treating them as authoritative.
